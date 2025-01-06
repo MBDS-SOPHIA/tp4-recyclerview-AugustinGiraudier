@@ -1,6 +1,7 @@
 package com.openclassrooms.magicgithub.api
 
 import com.openclassrooms.magicgithub.model.User
+import kotlin.random.Random
 
 class FakeApiService : ApiService {
     private val _users = FakeApiServiceGenerator.FAKE_USERS
@@ -18,14 +19,14 @@ class FakeApiService : ApiService {
      * This user must be get from the [FakeApiServiceGenerator.FAKE_USERS_RANDOM] list.
      */
     override fun addRandomUser() {
-        val random = FakeApiServiceGenerator.FAKE_USERS_RANDOM.random()
-        _users.add(random)
+        val random = Random.nextInt(0, FakeApiServiceGenerator.FAKE_USERS_RANDOM.size)
+        _users.add(FakeApiServiceGenerator.FAKE_USERS_RANDOM[random])
     }
 
     /**
      * Delete a [User] from the [FakeApiService.users] list.
      */
     override fun deleteUser(user: User) {
-        _users.removeAt(0)
+        _users.remove(user)
     }
 }
